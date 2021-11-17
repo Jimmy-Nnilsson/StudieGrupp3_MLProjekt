@@ -1,0 +1,2 @@
+dataset 1. https://www.kaggle.com/navoneel/brain-mri-images-for-brain-tumor-detection/code
+dataset 2. https://www.kaggle.com/masoudnickparvar/brain-tumor-mri-dataset
