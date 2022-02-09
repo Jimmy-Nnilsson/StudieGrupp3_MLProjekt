@@ -1,1 +1,10 @@
-
+ipykernel
+difPy==2.0
+matplotlib==3.5.1
+numpy==1.21.5
+pandas==1.4.0
+Pillow==9.0.0
+scikit-learn==1.0.2
+seaborn==0.11.2
+tensorflow==2.7.0
+opencv-python==4.5.5.62
