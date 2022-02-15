@@ -1,0 +1,32 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.9.0",
+    "heartbeatAt": "2022-02-15T09:40:25.346722",
+    "startedAt": "2022-02-15T09:40:13.560463",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "--ip=127.0.0.1",
+        "--stdin=9003",
+        "--control=9001",
+        "--hb=9000",
+        "--Session.signature_scheme=\"hmac-sha256\"",
+        "--Session.key=b\"a5d186f8-98f7-4a97-8012-df9d48fb8958\"",
+        "--shell=9002",
+        "--transport=\"tcp\"",
+        "--iopub=9004",
+        "--f=C:\\Users\\Jimmy\\AppData\\Local\\Temp\\tmp-5676J2nn0u26gW9f.json"
+    ],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/Jimmy-Nnilsson/StudieGrupp3_MLProjekt.git",
+        "commit": "ab850d1a35646d6ff2c84a621507cf686ff06a8b"
+    },
+    "email": "jimmy.nilsson@hotmail.se",
+    "root": "D:/Git/06_ML_Projekt/StudieGrupp3_MLProjekt",
+    "host": "DESKTOP-B9VFUAM",
+    "username": "Jimmy",
+    "executable": "C:\\Users\\Jimmy\\anaconda3\\envs\\g3\\python.exe"
+}
