@@ -144,4 +144,7 @@ cython_debug/
 
 #Private workfiles
 prvt*
+
+#wandb folder
+wandb
 # End of https://www.toptal.com/developers/gitignore/api/python
