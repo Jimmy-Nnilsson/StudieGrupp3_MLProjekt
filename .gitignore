@@ -147,4 +147,5 @@ prvt*
 
 #wandb folder
 wandb
+artifacts
 # End of https://www.toptal.com/developers/gitignore/api/python
