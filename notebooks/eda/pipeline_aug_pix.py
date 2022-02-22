@@ -40,8 +40,8 @@ class BEX_aug_pixel():
         dict_yes_aug_files = self.aug_image_and_save_to_dict(yes_images, list_of_names_yes)
 
         #skapar sökväg där de aug. bilderna skall sparas
-        no_aug_path = Path(str(path_no[0].parent.parent.parent)+"\\3_aug_no_train_pix\\")
-        yes_aug_path = Path(str(path_yes[0].parent.parent.parent)+"\\3_aug_yes_train_pix\\")
+        no_aug_path = Path(str(path_no[0].parent.parent.parent)+"\\3_augmentation_train\\3_aug_pix_no_train\\")
+        yes_aug_path = Path(str(path_yes[0].parent.parent.parent)+"\\3_augmentation_train\\3_aug_pix_yes_train\\")
 
         listan = [no_aug_path, yes_aug_path]                    #lista med yes och no sökväg
         self.check_and_create_folder(listan)                         #ta bort mapp om finns och skapa ny
@@ -186,9 +186,9 @@ class BEX_aug_pixel():
         for i in listan:
             if os.path.exists(i):
                 shutil.rmtree(i)
-                os.mkdir(i)
+                os.makedirs(i)
             elif not os.path.exists(i):
-                os.mkdir(i)
+                os.makedirs(i)
                 
     def saving_images(self, dictionary, paths):
         """funktion som sparar de augumenterade bilderna i rätt mappar"""
