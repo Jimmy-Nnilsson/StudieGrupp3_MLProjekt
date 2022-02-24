@@ -19,7 +19,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 import cv2
 from keras.applications.vgg16 import VGG16
-    
+
 class Model_Class():
     def __init__(self,
                  model_path):
@@ -107,6 +107,7 @@ class Model_Class():
         return heatmap.numpy()
 
     def predict(self, pic):
+        pic = cv2.resize(pic, dsize=(224,224))
         x = model_preprocess(pic)
         if len(x.shape) < 4:
           x = np.expand_dims(x, axis=0)
@@ -115,7 +116,7 @@ class Model_Class():
         return preds
 
     def superimpose(self, pic,heatmap):
-        img_numpy = np.asarray(pic)
+        img_numpy = np.asarray(np.clip(pic, 0, 190))
 
         heatmap_resized = cv2.resize(heatmap, (img_numpy.shape[1], img_numpy.shape[0]))
         heatmap_resized = np.uint8(255 * heatmap_resized)

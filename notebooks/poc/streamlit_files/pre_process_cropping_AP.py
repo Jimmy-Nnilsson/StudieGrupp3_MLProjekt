@@ -5,16 +5,20 @@ import pathlib
 class BEX_cropping():
     """Cropping class som tar emot fullständig sökväg, cropppar enligt algoritm o returnerar np-array"""
 
-    def __init__(self,f_name):
+    def __init__(self,f_name=None):
         self.file_name = f_name
 
 
-    def calculate_cropping(self):
+    def calculate_cropping(self, img):
         frame = 3                                             # klipper av en ram runt bilden direkt eftersom mkt smuts sitter där
         IMG_SIZE = (224, 224)                                    # detta är storleken som bilderna rezas till
         shape_comparison = []
-        fname = self.file_name
-        image = cv2.imread(str(fname))                          
+        if self.file_name != None:
+            fname = self.file_name
+            image = cv2.imread(str(fname))                          
+        else:
+            image = img
+        
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         temp = gray[frame:-frame, frame:-frame]             # temp är bild-numpyn
@@ -76,7 +80,7 @@ class BEX_cropping():
 
 
         new_image = cv2.resize(new_image, IMG_SIZE)
-
+        new_image = np.stack((new_image,)*3, axis=-1)
         return new_image
 
 #---------------hjälp funktion--------------------------------

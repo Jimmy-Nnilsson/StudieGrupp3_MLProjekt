@@ -28,23 +28,31 @@ def main():
         filename = st.file_uploader(label='Drop it like its hot')
         if add_selectbox == "Evaluate image":
             if st.button("Put model to work!"):
-                # get_path = os.getcwd()
-                # src_path = pathlib.Path(get_path)
-                # comp_path = src_path / filename.name        # issues with streamlit and path
+                get_path = os.getcwd()
+                src_path = pathlib.Path(get_path)
+                comp_path = src_path / filename.name        # issues with streamlit and path
+                
 
-                # # pipelining for size and cropping
-                # obj = BEX_cropping(comp_path)      
-                # st.write(filename.name)
-                # np_croppped = obj.calculate_cropping()    
-                # st.image(np_croppped, caption="Model says: " + model.predict(obj))
-
-                st.write(type(model))
+                
                 if filename is not None:
                     image = Image.open(filename)
                     img_array = np.array(image)
-                pred = model.predict(img_array)
-                st.write(f"{CLASSES[int(pred+0.5)]} with {round(pred[0][0]*100, 1)}% certainty")
-                image, heatmap, superimposed_img = model.grad_cam(img_array)
+                    # st.write((np.stack(img_array,img_array, axis=2).shape))
+                # pipelining for size and cropping
+                # obj = BEX_cropping(comp_path)
+                obj = BEX_cropping()
+                st.write(filename.name)
+                np_croppped = obj.calculate_cropping(img_array)
+                st.image(np_croppped)
+                
+                pred = model.predict(np_croppped)
+                if pred < 0.5:
+                    pct = (0.5 - pred[0][0]) * 2
+                else:
+                    pct = (pred[0][0] - 0.5)*2
+                st.write(f"{CLASSES[int(pred+0.5)]} with {round(pct*100, 1)}% certainty")
+                st.write(f"pred output:{round(pred[0][0], 3)}")
+                image, heatmap, superimposed_img = model.grad_cam(np_croppped)
                 col11, col12, col13 = st.columns(3)
                 with col11:
                     st.write("Original picture")
@@ -53,7 +61,9 @@ def main():
                     st.write("With heatcam overlay")
                     st.image(superimposed_img)
                 with col13:
-                    st.image(heatmap)
+                    st.write("Heatcam")
+                    uint_heatmap = (np.uint8(255 * heatmap))
+                    st.image(cv2.applyColorMap(uint_heatmap, cv2.COLORMAP_OCEAN))
 
 # ---------------------------------------------------
 
