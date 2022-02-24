@@ -19,7 +19,10 @@ class BEX_cropping():
         else:
             image = img
         
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        if len(image.shape) == 3:
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = image
 
         temp = gray[frame:-frame, frame:-frame]             # temp är bild-numpyn
         res_std_x = np.std(temp, axis = 0)                  #skapar en arr med standardavvikelse för x och y
