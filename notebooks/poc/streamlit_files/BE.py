@@ -13,7 +13,7 @@ from utils import *
 
 def main():
     st.sidebar.image("bex_cube_certified.png", use_column_width=True)
-    add_selectbox = st.sidebar.selectbox("Machine model operations",("Home screen","Evaluate image", "View Model data", "Model Screen"))
+    add_selectbox = st.sidebar.selectbox("Machine model operations",("Home screen","Evaluate image", "View Model data"))
     
     
     if add_selectbox == "Home screen":
@@ -24,8 +24,8 @@ def main():
 
 
     if add_selectbox == "Evaluate image":
-        st.write("# Lets classify the animal... or analyse your brain")
-        filename = st.file_uploader(label='Drop it like its hot')
+        st.write("# Lets analyse your brain")
+        filename = st.file_uploader(label = 'Drag and drop file (image of brain MRI) to examine')
         if add_selectbox == "Evaluate image":
             if st.button("Put model to work!"):
                 get_path = os.getcwd()
@@ -43,15 +43,16 @@ def main():
                 obj = BEX_cropping()
                 st.write(filename.name)
                 np_croppped = obj.calculate_cropping(img_array)
-                st.image(np_croppped)
-                
+                #st.image(np_croppped)
                 pred = model.predict(np_croppped)
+                result_str = ""
                 if pred < 0.5:
                     pct = (0.5 - pred[0][0]) * 2
                 else:
                     pct = (pred[0][0] - 0.5)*2
-                st.write(f"{CLASSES[int(pred+0.5)]} with {round(pct*100, 1)}% certainty")
-                st.write(f"pred output:{round(pred[0][0], 3)}")
+                result_str = f"{CLASSES[int(pred+0.5)]} with {round(pct*100, 1)}% certainty"
+
+                #st.write(f"pred output:{round(pred[0][0], 3)}")
                 image, heatmap, superimposed_img = model.grad_cam(np_croppped)
                 col11, col12, col13 = st.columns(3)
                 with col11:
@@ -64,6 +65,9 @@ def main():
                     st.write("Heatcam")
                     uint_heatmap = (np.uint8(255 * heatmap))
                     st.image(cv2.applyColorMap(uint_heatmap, cv2.COLORMAP_OCEAN))
+                
+                
+                st.write(result_str)
 
 # ---------------------------------------------------
 
@@ -73,10 +77,10 @@ def main():
         col1, col2 = st.columns(2)
         with col1:
             image = Image.open("train_eval.png")     
-            st.image(image, caption="Train and evaluate")
+            st.image(image, caption="Plots from training model")
         with col2:
             image = Image.open("train_eval2.png")     
-            st.image(image, caption="Train afasdf f e")
+            st.image(image, caption="Plots from training model")
 
 
 
