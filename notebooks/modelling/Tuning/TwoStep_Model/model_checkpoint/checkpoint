@@ -1,0 +1,2 @@
+model_checkpoint_path: "vgg19_MRI_Baseline_3_s2_twostep.h5_step2"
+all_model_checkpoint_paths: "vgg19_MRI_Baseline_3_s2_twostep.h5_step2"
