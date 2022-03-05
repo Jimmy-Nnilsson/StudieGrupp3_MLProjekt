@@ -149,3 +149,4 @@ prvt*
 wandb
 artifacts
 # End of https://www.toptal.com/developers/gitignore/api/python
+*.tar
